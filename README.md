@@ -8,5 +8,6 @@ My solutions of the programming challenge from the site [Project Euler](https://
 * Javascript
 * Php
 * Python
+* R
 * Ruby
 * Rust
