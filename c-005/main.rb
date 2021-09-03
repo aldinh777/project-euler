@@ -21,7 +21,7 @@ def smallestDivisible reducer
     for i in 2..reducer
         result = reduceResult(result*i, i)
     end
-    return result
+    result
 end
 
 puts smallestDivisible 20
