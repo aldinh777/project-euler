@@ -14,6 +14,6 @@ def pythagoreanTripletExplosion(sumTotal):
                 c = getLastPair(a, b)
                 if a + b + c == sumTotal:
                     return int(a * b * c)
-        a = a + 1
+        a += 1
 
 print(pythagoreanTripletExplosion(1000))
