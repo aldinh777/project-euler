@@ -1,5 +1,5 @@
 def largestPrimeFactor num
-    for i in 2...num
+    for i in 2...num do
         if num % i == 0 then
             return largestPrimeFactor(num / i)
         end
@@ -7,4 +7,4 @@ def largestPrimeFactor num
     num
 end
 
-puts largestPrimeFactor 600_851_475_143
+puts largestPrimeFactor(600_851_475_143)

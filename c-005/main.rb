@@ -1,6 +1,6 @@
 def allReducable num, reducer
-    for i in 1..reducer
-        if num % i != 0
+    for i in 1..reducer do
+        if num % i != 0 then
             return false
         end
     end
@@ -8,8 +8,8 @@ def allReducable num, reducer
 end
 
 def reduceResult num, reducer
-    for i in (2..reducer).reverse_each
-        if allReducable(num/i, reducer)
+    for i in (2..reducer).reverse_each do
+        if allReducable(num/i, reducer) then
             return reduceResult(num/i, reducer)
         end
     end
@@ -18,10 +18,10 @@ end
 
 def smallestDivisible reducer
     result = 1
-    for i in 2..reducer
+    for i in 2..reducer do
         result = reduceResult(result*i, i)
     end
     result
 end
 
-puts smallestDivisible 20
+puts smallestDivisible(20)

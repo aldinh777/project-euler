@@ -4,4 +4,4 @@ def sum35 max
         .sum
 end
 
-puts sum35 1000
+puts sum35(1000)

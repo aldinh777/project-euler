@@ -1,8 +1,8 @@
 def isPrime number
     limit = number
     i = 2
-    while i < limit
-        if number % i == 0
+    while i < limit do
+        if number % i == 0 then
             return false
         else
             limit = number / i.to_i
@@ -14,13 +14,13 @@ end
 
 def primeAt at
     loopen, number = 0, 1
-    while loopen < at
+    while loopen < at do
         number = number + 1
-        if isPrime(number)
+        if isPrime(number) then
             loopen = loopen + 1
         end
     end
     number
 end
 
-print(primeAt(10001))
+puts primeAt(10001)

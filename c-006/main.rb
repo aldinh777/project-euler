@@ -4,4 +4,4 @@ def sumDifSquare num
     y - x
 end
 
-print sumDifSquare 100
+print sumDifSquare(100)

@@ -1,8 +1,8 @@
 def fibEvenProc max
     sum, prev_val, next_val = 0, 0, 1
-    while next_val < max
+    while next_val < max do
         current = prev_val + next_val
-        if current % 2 == 0
+        if current % 2 == 0 then
             sum += current
         end
         prev_val, next_val = next_val, current
@@ -10,4 +10,4 @@ def fibEvenProc max
     sum
 end
 
-puts fibEvenProc 4_000_000
+puts fibEvenProc(4_000_000)
