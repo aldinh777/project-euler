@@ -7,5 +7,5 @@ largestPalindrome num
     where
         result = head [num * a| a <- reverse [0..num], isPalindrome (num * a)]
 
-main =
+main = do
     print $ largestPalindrome 999

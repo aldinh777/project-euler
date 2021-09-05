@@ -12,5 +12,5 @@ primeAt at = testPrimeAt 0 at 2
             | isPrime numcheck      = testPrimeAt (iter + 1) maxIter (numcheck + 1)
             | otherwise             = testPrimeAt iter maxIter (numcheck + 1)
 
-main =
+main = do
     print $ primeAt 10001

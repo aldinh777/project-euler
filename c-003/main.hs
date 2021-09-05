@@ -9,5 +9,5 @@ largestPrimeFactor num
     where
         divider = findMatch (\a -> mod num a == 0) [2..(num-1)]
 
-main =
+main = do
     print $ largestPrimeFactor 600851475143

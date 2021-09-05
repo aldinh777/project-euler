@@ -12,5 +12,5 @@ smallestDivisible reducer
     where
         result = smallestDivisible (reducer - 1) * reducer
 
-main =
+main = do
     print $ smallestDivisible 20

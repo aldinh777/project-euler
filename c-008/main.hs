@@ -46,5 +46,5 @@ productList list cuts   = product (take cuts list) : productList (tail list) cut
 greatestProdOf num list =
     maximum $ productList list num
 
-main =
+main = do
     print $ greatestProdOf 13 problemdata
