@@ -1,6 +1,9 @@
 package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 func SumDifSquare(num int) int {
 	x, y := 0, 0
@@ -14,5 +17,5 @@ func SumDifSquare(num int) int {
 }
 
 func main() {
-	println(SumDifSquare(100))
+	fmt.Println(SumDifSquare(100))
 }

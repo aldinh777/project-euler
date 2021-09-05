@@ -1,6 +1,9 @@
 package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 func GetLastPair(a int, b int) float64 {
 	return math.Sqrt(math.Pow(float64(a), 2) + math.Pow(float64(b), 2))
@@ -26,5 +29,5 @@ func pythagorean_triplet_explosion(sum_total int) int {
 }
 
 func main() {
-	println(pythagorean_triplet_explosion(1000))
+	fmt.Println(pythagorean_triplet_explosion(1000))
 }

@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func Sum35(max int) int {
 	sum := 0
 	for i := 0; i < max; i++ {
@@ -11,5 +13,5 @@ func Sum35(max int) int {
 }
 
 func main() {
-	println(Sum35(1000))
+	fmt.Println(Sum35(1000))
 }

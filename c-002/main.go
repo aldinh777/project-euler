@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func FibEvenProc(max int) int {
 	sum, prev, next := 0, 0, 1
 	for next < max {
@@ -13,5 +15,5 @@ func FibEvenProc(max int) int {
 }
 
 func main() {
-	println(FibEvenProc(4_000_000))
+	fmt.Println(FibEvenProc(4_000_000))
 }

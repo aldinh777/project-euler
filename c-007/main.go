@@ -1,6 +1,9 @@
 package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 func isPrime(number int) bool {
 	limit := number
@@ -26,5 +29,5 @@ func primeAt(at int) int {
 }
 
 func main() {
-	println(primeAt(10001))
+	fmt.Println(primeAt(10001))
 }

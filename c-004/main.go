@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math"
 	"strconv"
 )
@@ -30,5 +31,5 @@ func LargestPalindrome(num int) int {
 }
 
 func main() {
-	println(LargestPalindrome(999))
+	fmt.Println(LargestPalindrome(999))
 }

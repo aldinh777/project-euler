@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func AllReducable(num int, reducer int) bool {
 	for i := 1; i <= reducer; i++ {
 		if num%i != 0 {
@@ -27,5 +29,5 @@ func SmallestDivisible(reducer int) int {
 }
 
 func main() {
-	println(SmallestDivisible(20))
+	fmt.Println(SmallestDivisible(20))
 }

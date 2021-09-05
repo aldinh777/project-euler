@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func LargestPrimeFactor(num int) int {
 	for i := 2; i < num; i++ {
 		if num%i == 0 {
@@ -10,5 +12,5 @@ func LargestPrimeFactor(num int) int {
 }
 
 func main() {
-	println(LargestPrimeFactor(600_851_475_143))
+	fmt.Println(LargestPrimeFactor(600_851_475_143))
 }
