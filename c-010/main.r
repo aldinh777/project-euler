@@ -1,26 +1,17 @@
-theCoolerIsPrime <- function (number, primelist) {
-    limitcheck <- number
-    for (i in primelist) {
-        if (i > limitcheck) {
-            return(TRUE)
-        }
-        if (number %% i == 0) {
-            return(FALSE)
-        } else {
-            limitcheck <- number / i
-        }
-    }
-    TRUE
-}
-
+# Now this is the R way of doing this
 primeSumUpto <- function (limit) {
-    primes <- c()
+    primesflag <- rep(TRUE, limit - 1)
     for (i in 2:limit) {
-        if (theCoolerIsPrime(i, primes)) {
-            primes <- c(primes, i)
+        for (j in 2:i) {
+            target <- i * j
+            if (target > limit) {
+                break
+            }
+            primesflag[target - 1] <- FALSE
         }
     }
-    sum(primes)
+    primes <- c(2:limit)
+    sum(primes[primesflag])
 }
 
 print(primeSumUpto(2000000))
