@@ -3,3 +3,5 @@
 *.o
 *.pdb
 *.hi
+build
+test_config.json
