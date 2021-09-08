@@ -19,6 +19,9 @@ function executeProgram(lang, level) {
     return new Promise((resolve, reject) => {
         const start = Date.now();
         const process = spawn(cmd, args);
+        if (config.displayExecutionProgress) {
+            console.log(`| ${ch(level)} EXECUTING \t| ${name}`);
+        }
         process.stdout.on('data', data => {
             const end = Date.now();
             const timeEllapsed = end - start;
@@ -26,9 +29,9 @@ function executeProgram(lang, level) {
             const result = config.parseOutput && parsed ? parsed[1] : data.toString();
             resolve({ name, level, result, timeEllapsed });
             if (config.displayExecutionProgress) {
-                console.log(`${name}\t| ${ch(level)} EXECUTED \t| ${timeEllapsed}ms`);
+                console.log(`| ${ch(level)} COMPLETED \t| ${name}`);
             }
-        });
+            });
         process.stderr.on('data', err => {
             reject(err.toString());
         });
@@ -42,6 +45,7 @@ function compileProgram(lang, level) {
         mkdirp(outputDir(level));
         const start = Date.now();
         const process = spawn(compiler, args(level));
+        console.log(`| ${ch(level)} COMPILING \t| ${name}`);
         process.stderr.on('data', err => {
             reject(err.toString());
         });
@@ -50,7 +54,7 @@ function compileProgram(lang, level) {
             const compileTime = end - start;
             resolve({ name, level, compileTime});
             if (config.displayCompilationProgress) {
-                console.log(`${name}\t| ${ch(level)} COMPILED \t| ${compileTime}ms`);
+                console.log(`| ${ch(level)} COMPLETED \t| ${name}`);
             }
         });
     });
@@ -83,17 +87,32 @@ if (hasCompiled) {
 }
 
 compilation
-    .then(_ => {
+    .then(async _ => {
         if (config.displayExecutionProgress) {
             console.log('== EXECUTING ==');
         }
-        return Promise.all(programming
-            .map(p => Promise.all(config.level.map(lv => executeProgram(p, lv))).catch(console.error))
-        );
+        if (config.parallelExecution) {
+            return Promise.all(programming
+                .map(p => Promise.all(config.level.map(lv => executeProgram(p, lv))).catch(console.error))
+            );
+        } else {
+            const progResult = [];
+            for (const prog of programming) {
+                const lvResult = [];
+                for (const lv of config.level) {
+                    lvResult.push(await executeProgram(prog, lv));
+                }
+                progResult.push(lvResult);
+            }
+            return progResult;
+        }
     })
     .then(result => {
         console.log('== RESULTS ==');
         for (const lang of result) {
+            if (!lang) {
+                continue;
+            }
             console.log(`[[[ ${lang[0].name} ]]]`);
             for (const progresult of lang) {
                 const { level, result, timeEllapsed } = progresult;
