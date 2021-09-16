@@ -5,3 +5,4 @@
 *.hi
 build
 test_config.json
+node_modules
