@@ -17,7 +17,7 @@ def primeSumUpto limit
     primes = []
     for i in 2..limit do
         if theCoolerIsPrime(i, primes) then
-            primes.append(i)
+            primes.push(i)
         end
     end
     primes.sum

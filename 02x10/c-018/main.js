@@ -26,8 +26,7 @@ function findLargeRoute(index, triangle) {
 }
 
 function largestRoute(triangle) {
-    const [result] = findLargeRoute(0, triangle)
-    return result
+    return findLargeRoute(0, triangle)[0]
 }
 
 console.log(largestRoute(triangleOfDestiny))

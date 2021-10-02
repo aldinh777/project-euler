@@ -44,7 +44,9 @@ problemdata = [
 def greatestProdOf limit, list
     result = 0
     for i in 0...(list.length - limit) do
-		prod = list.slice(i, limit).inject { |a, b| a * b }
+		prod = list
+			.slice(i, limit)
+			.inject { |a, b| a * b }
 		result = [prod, result].max
     end
 	result
