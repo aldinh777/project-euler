@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { spawn } = require('child_process');
 const expected_result = require('./expected_result');
-const { ch, languages } = require('./lang');
+const { ch, languages, partialch } = require('./lang');
 const default_config = require('../_default_config.json');
 
 let config = default_config;
@@ -116,8 +116,8 @@ compilation
             console.log(`[[[ ${lang[0].name} ]]]`);
             for (const progresult of lang) {
                 const { level, result, timeEllapsed } = progresult;
-                const answer = expected_result[ch(level)];
-                const correct = result == expected_result[ch(level)] ? 'CORRECT' : 'INCORRECT';
+                const answer = expected_result[partialch(level)];
+                const correct = result == answer ? 'CORRECT' : 'INCORRECT';
                 let strout = `${ch(level)}`;
                 if (config.compareAnswer) {
                     strout +=  `\t| ${correct}`;

@@ -1,8 +1,8 @@
-function ch(num) {
+function partialch(num) {
     const res = num.toString();
     switch (res.length) {
         case 1:
-            return 'c-00' + res;    
+            return 'c-00' + res;
         case 2:
             return 'c-0' + res;
         default:
@@ -10,8 +10,23 @@ function ch(num) {
     }
 }
 
+function ch(num) {
+    const div = Math.ceil(num / 10).toString();
+    let parent;
+    switch (div.length) {
+        case 1:
+            parent = '0' + div + 'x10';
+            break;
+        default:
+            parent = div + 'x10';
+            break;
+    }
+    return parent + '/' + partialch(num);
+}
+
 module.exports = {
     ch,
+    partialch,
     languages: {
         python: {
             name: 'Python3',
