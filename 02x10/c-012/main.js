@@ -14,9 +14,9 @@ function factorsLengthOver(num, max) {
 }
 
 function triangleFactorOver(maxFactor) {
-    let triangle = 0;
+    let triangle = 0
     for (let i = 1; ; i++) {
-        triangle += i;
+        triangle += i
         if (factorsLengthOver(triangle, maxFactor)) {
             break
         }
