@@ -25,7 +25,7 @@ function executeProgram(lang, level) {
         process.stdout.on('data', data => {
             const end = Date.now();
             const timeEllapsed = end - start;
-            const parsed = /(\d+)\s/.exec(data.toString());
+            const parsed = /\"?(\d+)\"?\s/.exec(data.toString());
             const result = config.parseOutput && parsed ? parsed[1] : data.toString();
             resolve({ name, level, result, timeEllapsed });
             if (config.displayExecutionProgress) {
