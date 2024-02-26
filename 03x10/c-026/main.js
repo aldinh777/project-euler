@@ -1,4 +1,3 @@
-let it = 0
 function repricocalistization(str, min) {
     for (let i = min; i < str.length; i++) {
         const a = str.slice(0, i)
@@ -6,7 +5,6 @@ function repricocalistization(str, min) {
         for (let j = 0; j < i; j++) {
             const ax = a.slice(j, i)
             const bx = b.slice(0, i - j)
-            it++
             if (ax === bx) {
                 const cx = str.slice(i, str.length)
                 const lenx = cx.length - (cx.length % ax.length)
@@ -47,4 +45,3 @@ function lengthestReciprocal() {
 }
 
 console.log(lengthestReciprocal())
-console.log(it.toLocaleString())
