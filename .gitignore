@@ -6,3 +6,4 @@
 build
 test_config.json
 node_modules
+/main.js
