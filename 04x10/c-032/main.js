@@ -25,7 +25,6 @@ for (let a = 1; a < 100; a++) {
         } else if (lennn === 9 && isPandigital('' + a + b + prod)) {
             if (!arr.includes(prod)) {
                 arr.push(prod)
-                console.log(a, b, prod)
             }
         }
     }
