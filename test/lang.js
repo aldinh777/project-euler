@@ -1,100 +1,134 @@
 function partialch(num) {
-    const res = num.toString();
+    const res = num.toString()
     switch (res.length) {
         case 1:
-            return 'c-00' + res;
+            return 'c-00' + res
         case 2:
-            return 'c-0' + res;
+            return 'c-0' + res
         default:
-            return 'c-' + res;
+            return 'c-' + res
     }
 }
 
 function ch(num) {
-    const div = Math.ceil(num / 10).toString();
-    let parent;
+    const div = Math.ceil(num / 10).toString()
+    let parent
     switch (div.length) {
         case 1:
-            parent = '0' + div + 'x10';
-            break;
+            parent = '0' + div + 'x10'
+            break
         default:
-            parent = div + 'x10';
-            break;
+            parent = div + 'x10'
+            break
     }
-    return parent + '/' + partialch(num);
+    return parent + '/' + partialch(num)
 }
 
 module.exports = {
     ch,
     partialch,
     languages: {
-        python: {
+        // Interpreted Language
+        py: {
             name: 'Python3',
             run: {
-                cmd: 'py',
-                args: level => [`./${ch(level)}/main.py`],
-            },
+                cmd: 'python',
+                args: (level) => [`./${ch(level)}/main.py`]
+            }
         },
-        ruby: {
+        rb: {
             name: 'Ruby',
             run: {
                 cmd: 'ruby',
-                args: level => [`./${ch(level)}/main.rb`],
-            },
+                args: (level) => [`./${ch(level)}/main.rb`]
+            }
         },
         js: {
             name: 'Javascript',
             run: {
                 cmd: 'node',
-                args: level => [`./${ch(level)}/main.js`],
-            },
+                args: (level) => [`./${ch(level)}/main.js`]
+            }
+        },
+        js_bun: {
+            name: 'Javascript (Bun)',
+            run: {
+                cmd: 'bun',
+                args: (level) => [`./${ch(level)}/main.js`]
+            }
         },
         php: {
             name: 'PHP',
             run: {
                 cmd: 'php',
-                args: level => [`./${ch(level)}/main.php`],
-            },
+                args: (level) => [`./${ch(level)}/main.php`]
+            }
         },
         r: {
             name: 'R',
             run: {
                 cmd: 'Rscript',
-                args: level => [`./${ch(level)}/main.r`],
-            },
+                args: (level) => [`./${ch(level)}/main.r`]
+            }
         },
-        go: {
-            name: 'Go',
-            run: {
-                cmd: 'go',
-                args: level => ['run', `./${ch(level)}/main.go`],
-            },
-        },
-        java: {
-            name: 'Java',
-            run: {
-                cmd: 'java',
-                args: level => [`./${ch(level)}/Main.java`],
-            },
-        },
-        haskell: {
+        // Compiled Language
+        hs: {
             name: 'Haskell',
             compile: {
                 compiler: 'ghc',
-                args: level => [`./${ch(level)}/main.hs`,
-                    '-o', `./build/haskell/${ch(level)}/main`,
-                    '-outputdir', `./build/haskell/${ch(level)}`],
-                outputDir: level => `./build/haskell/${ch(level)}/`,
-            },
+                args: (level) => [
+                    `./${ch(level)}/main.hs`,
+                    '-o',
+                    `./build/haskell/${ch(level)}/main`,
+                    '-outputdir',
+                    `./build/haskell/${ch(level)}`
+                ],
+                outputDir: (level) => `./build/haskell/${ch(level)}/`
+            }
         },
-        rust: {
+        rs: {
             name: 'Rust',
             compile: {
                 compiler: 'rustc',
-                args: level => [`./${ch(level)}/main.rs`,
-                    '-o', `./build/rust/${ch(level)}/main.exe`],
-                outputDir: level => `./build/rust/${ch(level)}/`,
-            },
+                args: (level) => [`./${ch(level)}/main.rs`, '-o', `./build/rust/${ch(level)}/main`],
+                outputDir: (level) => `./build/rust/${ch(level)}/`
+            }
         },
+        go: {
+            name: 'Go',
+            compile: {
+                compiler: 'go',
+                args: (level) => ['build', '-o', `./build/go/${ch(level)}/main`, `./${ch(level)}/main.go`],
+                outputDir: (level) => `./build/go/${ch(level)}/`
+            }
+        },
+        java: {
+            name: 'Java',
+            compile: {
+                compiler: 'javac',
+                args: (level) => ['-d', `./build/java/${ch(level)}`, `./${ch(level)}/Main.java`],
+                outputDir: (level) => `./build/java/${ch(level)}/`
+            },
+            run: {
+                cmd: 'java',
+                args: () => ['Main'],
+                cwd: (level) => `./build/java/${ch(level)}`
+            }
+        },
+        // Uncompiled Executable
+        go_run: {
+            name: 'Go (exec)',
+            run: {
+                cmd: 'go',
+                args: (level) => ['run', `./${ch(level)}/main.go`]
+            }
+        },
+        java_run: {
+            name: 'Java (exec)',
+            run: {
+                cmd: 'java',
+                args: (level) => [`./${ch(level)}/Main.java`]
+            }
+        }
     }
-};
+}
