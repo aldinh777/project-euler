@@ -104,7 +104,8 @@ bigdata = [
 def first10digitSum biglist
     biglist
         .sum
-        .to_s.slice 0, 10
+        .to_s
+        .slice 0, 10
 end
 
 puts first10digitSum(bigdata)

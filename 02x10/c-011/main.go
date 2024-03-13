@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 var problemdata = []int{
 	8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8,
@@ -25,22 +28,20 @@ var problemdata = []int{
 	1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48,
 }
 
-func MaxVertical(list *[]int, length int) int {
-	max := 0
+func MaxVertical(list *[]int, length int) float64 {
+	max := float64(0)
 	for i := 0; i < len(*list)-((length-1)*20); i++ {
 		result := 1
 		for j := 0; j < length; j++ {
 			result *= (*list)[j*20+i]
 		}
-		if result > max {
-			max = result
-		}
+		max = math.Max(max, float64(result))
 	}
 	return max
 }
 
-func MaxHorizontal(list *[]int, length int) int {
-	max := 0
+func MaxHorizontal(list *[]int, length int) float64 {
+	max := float64(0)
 	for i := 0; i < 20; i++ {
 		for j := 0; j < 20-length-1; j++ {
 			result := 1
@@ -48,16 +49,14 @@ func MaxHorizontal(list *[]int, length int) int {
 			for k := index; k < index+length; k++ {
 				result *= (*list)[k]
 			}
-			if result > max {
-				max = result
-			}
+			max = math.Max(max, float64(result))
 		}
 	}
 	return max
 }
 
-func MaxDiagonal(list *[]int, length int) int {
-	max := 0
+func MaxDiagonal(list *[]int, length int) float64 {
+	max := float64(0)
 	for i := 0; i < 20-length-1; i++ {
 		for j := 0; j < 20-length-1; j++ {
 			result1 := 1
@@ -68,12 +67,7 @@ func MaxDiagonal(list *[]int, length int) int {
 				result1 *= (*list)[index1]
 				result2 *= (*list)[index2]
 			}
-			if result1 > max {
-				max = result1
-			}
-			if result2 > max {
-				max = result2
-			}
+			max = math.Max(max, math.Max(float64(result1), float64(result2)))
 		}
 	}
 	return max
@@ -83,14 +77,8 @@ func theBig3(list *[]int, length int) int {
 	maxVer := MaxVertical(list, length)
 	maxHor := MaxHorizontal(list, length)
 	maxDiag := MaxDiagonal(list, length)
-	max := maxVer
-	if maxHor > max {
-		max = maxHor
-	}
-	if maxDiag > max {
-		max = maxDiag
-	}
-	return max
+	max := math.Max(maxVer, math.Max(maxHor, maxDiag))
+	return int(max)
 }
 
 func main() {
