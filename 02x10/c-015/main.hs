@@ -6,7 +6,7 @@ gridlist x
     where
         beeflist = tail $ gridlist (x - 1)
 
-latticeRoutes grid = head $ gridlist grid
+latticeRoutes grid = head $ gridlist (grid + 1)
 
 main = do
     print $ latticeRoutes 20
