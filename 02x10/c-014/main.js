@@ -3,8 +3,8 @@ function collatzRule(num) {
 }
 
 function fillChain(num, map) {
-    const stack = [num];
-    let collatz = num;
+    const stack = [num]
+    let collatz = num
     while (!map.has(collatz)) {
         stack.push(collatz)
         collatz = collatzRule(collatz)
@@ -22,8 +22,8 @@ function largestChain(limit) {
     for (let i = 2; i <= limit; i++) {
         fillChain(i, chainLength)
     }
-    const result = Array.from(chainLength).reduce((a, b) => a[1] > b[1] ? a : b);
-    return result[0];
+    const result = Array.from(chainLength).reduce((a, b) => (a[1] > b[1] ? a : b))
+    return result[0]
 }
 
 console.log(largestChain(1_000_000))

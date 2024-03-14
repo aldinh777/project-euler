@@ -36,6 +36,8 @@
 
 ### Length
 
+-   Go : `len(array)`
+-   Js : `array.length`
 -   PHP : `count(array) | sizeof(array)`
 
 ### Append
