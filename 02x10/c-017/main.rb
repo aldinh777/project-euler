@@ -11,36 +11,36 @@ def getBritishVocal num
         when 8 then return 'eight'
         when 9 then return 'nine'
         when 10 then return 'ten'
-        when 11 then return "eleven"
-        when 12 then return "twelve"
-        when 13 then return "thirteen"
-        when 14 then return "fourteen"
-        when 15 then return "fifteen"
-        when 16 then return "sixteen"
-        when 17 then return "seventeen"
-        when 18 then return "eighteen"
-        when 19 then return "nineteen"
-        when 20 then return "twenty"
-        when 30 then return "thirty"
-        when 40 then return "forty"
-        when 50 then return "fifty"
-        when 60 then return "sixty"
-        when 70 then return "seventy"
-        when 80 then return "eighty"
-        when 90 then return "ninety"
+        when 11 then return 'eleven'
+        when 12 then return 'twelve'
+        when 13 then return 'thirteen'
+        when 14 then return 'fourteen'
+        when 15 then return 'fifteen'
+        when 16 then return 'sixteen'
+        when 17 then return 'seventeen'
+        when 18 then return 'eighteen'
+        when 19 then return 'nineteen'
+        when 20 then return 'twenty'
+        when 30 then return 'thirty'
+        when 40 then return 'forty'
+        when 50 then return 'fifty'
+        when 60 then return 'sixty'
+        when 70 then return 'seventy'
+        when 80 then return 'eighty'
+        when 90 then return 'ninety'
     end
     if num > 999 then
         thousandth = (num / 1000).floor
         rest = num - 1000 * thousandth
         vocalThousandth = getBritishVocal(thousandth) + ' thousand'
-        vocalRest = rest > 0 ? ' and' + getBritishVocal(rest) : ''
+        vocalRest = rest > 0 ? ' and ' + getBritishVocal(rest) : ''
         return vocalThousandth + vocalRest
     end
     if num > 99 then
         hundredth = (num / 100).floor
         rest = num - 100 * hundredth
         vocalHundred = getBritishVocal(hundredth) + ' hundred'
-        vocalRest = rest > 0 ? ' and' + getBritishVocal(rest) : ''
+        vocalRest = rest > 0 ? ' and ' + getBritishVocal(rest) : ''
         return vocalHundred + vocalRest
     end
     if num > 20 then

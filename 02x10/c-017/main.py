@@ -13,23 +13,23 @@ def getBritishVocal(num):
         8:  'eight',
         9:  'nine',
         10:  'ten',
-        11:  "eleven",
-        12:  "twelve",
-        13:  "thirteen",
-        14:  "fourteen",
-        15:  "fifteen",
-        16:  "sixteen",
-        17:  "seventeen",
-        18:  "eighteen",
-        19:  "nineteen",
-        20:  "twenty",
-        30:  "thirty",
-        40:  "forty",
-        50:  "fifty",
-        60:  "sixty",
-        70:  "seventy",
-        80:  "eighty",
-        90:  "ninety",
+        11:  'eleven',
+        12:  'twelve',
+        13:  'thirteen',
+        14:  'fourteen',
+        15:  'fifteen',
+        16:  'sixteen',
+        17:  'seventeen',
+        18:  'eighteen',
+        19:  'nineteen',
+        20:  'twenty',
+        30:  'thirty',
+        40:  'forty',
+        50:  'fifty',
+        60:  'sixty',
+        70:  'seventy',
+        80:  'eighty',
+        90:  'ninety',
     }
     if nums.get(num) != None:
         return nums.get(num)
@@ -37,13 +37,13 @@ def getBritishVocal(num):
         thousandth = int(num / 1000)
         rest = num - 1000 * thousandth
         vocalThousandth = getBritishVocal(thousandth) + ' thousand'
-        vocalRest = ' and' + getBritishVocal(rest) if rest > 0 else ''
+        vocalRest = ' and ' + getBritishVocal(rest) if rest > 0 else ''
         return vocalThousandth + vocalRest
     if num > 99:
         hundredth = int(num / 100)
         rest = num - 100 * hundredth
         vocalHundred = getBritishVocal(hundredth) + ' hundred'
-        vocalRest = ' and' + getBritishVocal(rest) if rest > 0 else ''
+        vocalRest = ' and ' + getBritishVocal(rest) if rest > 0 else ''
         return vocalHundred + vocalRest
     if num > 20:
         tenth = int(num / 10) * 10
