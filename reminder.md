@@ -1,22 +1,12 @@
 ## Loop
 
-### `for i < 10`
+### Ranges
 
--   Go
--   Javascript
-
-### `1..10 = 1 -> 9`
-
--   Rust
--   Java (`IntStream::range`)
--   Python (`range`)
-
-### `1..10 = 1 -> 10`
-
--   Haskell
--   Php (`range`)
--   R
--   Ruby
+-   Go & JS `for i < 10`
+-   Java & Python `IntStream::range(1, 10) & range(1, 10)` 1 -> 9
+-   PHP `range(1, 10)` 1 -> 10
+-   Rust `1..10` 1 -> 9
+-   Haskell, R & Ruby `1..10` 1 -> 10
 
 ## Array
 
@@ -24,20 +14,20 @@
 
 -   Haskell : `map fn array`
 -   Java : `Stream.map(Supplier s)`
--   Js & Ruby : `array.map(cb)`
+-   JS & Ruby : `array.map(cb)`
 -   PHP : `array_map(fn (v_array, ...v_next), array, ...next)`
 
 ### Filter
 
 -   Haskell : `filter fn array`
--   Js & Ruby : `Array.filter(cb)`
+-   JS & Ruby : `array.filter(cb)`
 -   Java : `Stream.filter(Supplier s)`
 -   PHP : `array_filter(array, fn (val))`
 
 ### Length
 
 -   Go : `len(array)`
--   Js : `array.length`
+-   JS : `array.length`
 -   PHP : `count(array) | sizeof(array)`
 
 ### Append
@@ -46,7 +36,7 @@
 -   Java : `array.add(item)`
 -   PHP : `array_push(array, item)`
 -   Python : `array.append(item)`
--   Js & Ruby & Rust : `array.push(item)`
+-   JS & Ruby & Rust : `array.push(item)`
 
 ## Math
 
@@ -54,7 +44,7 @@
 
 -   Haskell : `sum array`
 -   Java : `IntStream.sum()`
--   Js : `Array.reduce((a, b) => a + b)`
+-   JS : `Array.reduce((a, b) => a + b)`
 -   PHP : `array_sum(array)`
 -   Ruby & Rust : `Array.sum`
 -   R & Python : `sum(vector)`
@@ -63,7 +53,7 @@
 
 -   Go : `math.Max(float64 a, float64 b)`
 -   Haskell : `max a b`
--   Js & Java : `Math.max(a, b)`
+-   JS & Java : `Math.max(a, b)`
 -   PHP & R : `max(a, b, c, ...) || max(array)`
 -   Python : `max(a, b)`
 -   Ruby : `array.max`
@@ -75,7 +65,7 @@
 -   Haskell : `a ^ b`
 -   Java : `Math.pow(a, b)`
 -   Rust : `a.pow(b)`
--   Js, PHP, Python, R & Ruby : `a ** b`
+-   JS, PHP, Python, R & Ruby : `a ** b`
 
 ## String
 
@@ -84,16 +74,20 @@
 -   Go : `strconv.FormatInt(int64 num, int base)`
 -   Haskell : `show num`
 -   Java : `Integer.toString(int num)`
--   Js : `num.toString()`
+-   JS : `num.toString()`
 -   R : `toString(num)`
 -   Ruby : `num.to_s`
 -   Rust : `num.to_string()`
+
+### Str -> Int
+
+
 
 ### Reverse
 
 -   Haskell : `reverse str`
 -   Java : `new StringBuilder(str).reverse().toString()`
--   Js : `str.split().reverse().join('')`
+-   JS : `str.split().reverse().join('')`
 -   PHP : `strrev(str)`
 -   Python : `str[::-1]`
 -   R : `paste(rev(strsplit(str, "")[[1]]), collapse="")`
@@ -103,7 +97,6 @@
 ### Floor
 
 -   Go : `math.Floor(num)`
--   Java && Js : `Math.floor`
--   PHP & R : `floor(num)`
--   Python : `int(num)`
+-   Java && JS : `Math.floor`
+-   PHP, Python & R : `floor(num)`
 -   Ruby : `num.to_i`
