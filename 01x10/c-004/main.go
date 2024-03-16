@@ -7,7 +7,7 @@ import (
 )
 
 func IsPalindrome(num int) bool {
-	var str = strconv.FormatInt(int64(num), 10)
+	var str = strconv.Itoa(num)
 	for i := 0; i < len(str)/2; i++ {
 		if str[i] != str[len(str)-i-1] {
 			return false

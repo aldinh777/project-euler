@@ -71,7 +71,7 @@
 
 ### Int -> Str
 
--   Go : `strconv.FormatInt(int64 num, int base)`
+-   Go : `strconv.Itoa(int num)`
 -   Haskell : `show num`
 -   Java : `Integer.toString(int num)`
 -   JS : `num.toString()`
