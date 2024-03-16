@@ -32,4 +32,3 @@ def largestRoute triangle
 end
 
 puts largestRoute(triangleOfDestiny)
-puts [1, 2, 3, 4, 5, 6].slice(3, 2)
