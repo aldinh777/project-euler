@@ -20,19 +20,37 @@ problemdata = [
     20, 73, 35, 29, 78, 31, 90, 01, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 05, 54,
     01, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 01, 89, 19, 67, 48]
 
-maxVertical list len =
-    maximum [product [list !! (b + (a*20))|a <- [0..(len-1)]]| b <- [0..((20*20) - ((len-1)*20)) -1]]
+maxAdjacentProduct indexer rows cols len =
+    maximum [largestAdjacentProduct row | row <- rows len]
+    where
+        adjacentProduct start = product [problemdata !! indexer start i | i <- [0..(len - 1)]]
+        largestAdjacentProduct row = maximum [adjacentProduct (row * 20 + col) | col <- cols len]
 
-maxHorizontal list len =
-    maximum [product [list !! (b + a)| b <- [0..(len-1)]]| a <- [0..(20*20-1)], and [mod (a+i) 20 /= 0| i <- [1..3]]]
+maxVertical = maxAdjacentProduct indexer rows cols
+    where
+        indexer start i = start + i * 20
+        rows len = [0..(20 - len)]
+        cols _ = [0..19]
 
-maxDiagonal list len =
-    max
-    (maximum [product [list !! (b + (a*20) + a)|a <- [0..(len-1)]]| b <- [0..((20*20) - ((len-1)*20)) -1], and [mod (b+i) 20 /= 0| i <- [1..3]]])
-    (maximum [product [list !! (b + (a*20) + (len-1 - a))|a <- [0..(len-1)]]| b <- [0..((20*20) - ((len-1)*20)) -1], and [mod (b+i) 20 /= 0| i <- [1..3]]])
+maxHorizontal = maxAdjacentProduct (+) rows cols
+    where
+        rows _ = [0..19]
+        cols len = [0..(20 - len)]
+
+maxDiagonalLeft = maxAdjacentProduct indexer rows cols
+    where
+        indexer start i = start + 21 * i
+        rows len = [0..(20 - len)]
+        cols len = [0..(20 - len)]
+
+maxDiagonalRight = maxAdjacentProduct indexer rows cols
+    where
+        indexer start i = start + 19 * i
+        rows len = [0..(20 - len)]
+        cols len = [(len - 1)..19]
 
 theBig3 list len =
-    maximum [maxVertical list len, maxHorizontal list len, maxDiagonal list len]
+    maximum [x len | x <- [maxVertical, maxHorizontal, maxDiagonalLeft, maxDiagonalRight]]
 
 main = do
     print $ theBig3 problemdata 4
