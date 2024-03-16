@@ -14,7 +14,7 @@ func IsPythagorasPair(a int, b int) bool {
 }
 
 func pythagorean_triplet_explosion(sum_total int) int {
-	a := 1
+	var a = 1
 	for {
 		for b := 1; a > b; b++ {
 			if IsPythagorasPair(a, b) {

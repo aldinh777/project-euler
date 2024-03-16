@@ -6,7 +6,7 @@ import (
 )
 
 func isPrime(number int) bool {
-	limit := number
+	var limit = number
 	for i := 2; i < limit; i++ {
 		if number%i == 0 {
 			return false
@@ -18,7 +18,7 @@ func isPrime(number int) bool {
 }
 
 func primeAt(at int) int {
-	loopen, number := 0, 1
+	var loopen, number = 0, 1
 	for loopen < at {
 		number++
 		if isPrime(number) {

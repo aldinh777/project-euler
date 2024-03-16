@@ -21,7 +21,7 @@ func ReduceResult(num int, reducer int) int {
 }
 
 func SmallestDivisible(reducer int) int {
-	result := 1
+	var result = 1
 	for i := 2; i <= reducer; i++ {
 		result = ReduceResult(result*i, i)
 	}

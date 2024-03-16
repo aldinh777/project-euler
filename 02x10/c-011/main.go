@@ -29,9 +29,9 @@ var problemdata = []int{
 }
 
 func MaxVertical(list *[]int, length int) float64 {
-	max := float64(0)
+	var max = float64(0)
 	for i := 0; i < len(*list)-((length-1)*20); i++ {
-		result := 1
+		var result = 1
 		for j := 0; j < length; j++ {
 			result *= (*list)[j*20+i]
 		}
@@ -41,11 +41,11 @@ func MaxVertical(list *[]int, length int) float64 {
 }
 
 func MaxHorizontal(list *[]int, length int) float64 {
-	max := float64(0)
+	var max = float64(0)
 	for i := 0; i < 20; i++ {
 		for j := 0; j < 20-length-1; j++ {
-			result := 1
-			index := i*20 + j
+			var result = 1
+			var index = i*20 + j
 			for k := index; k < index+length; k++ {
 				result *= (*list)[k]
 			}
@@ -56,14 +56,14 @@ func MaxHorizontal(list *[]int, length int) float64 {
 }
 
 func MaxDiagonal(list *[]int, length int) float64 {
-	max := float64(0)
+	var max = float64(0)
 	for i := 0; i < 20-length-1; i++ {
 		for j := 0; j < 20-length-1; j++ {
-			result1 := 1
-			result2 := 1
+			var result1 = 1
+			var result2 = 1
 			for k := 0; k < length; k++ {
-				index1 := (i * 20) + (k * 20) + j + k
-				index2 := (i * 20) + (k * 20) + j + (length - 1 - k)
+				var index1 = (i * 20) + (k * 20) + j + k
+				var index2 = (i * 20) + (k * 20) + j + (length - 1 - k)
 				result1 *= (*list)[index1]
 				result2 *= (*list)[index2]
 			}
@@ -74,10 +74,10 @@ func MaxDiagonal(list *[]int, length int) float64 {
 }
 
 func theBig3(list *[]int, length int) int {
-	maxVer := MaxVertical(list, length)
-	maxHor := MaxHorizontal(list, length)
-	maxDiag := MaxDiagonal(list, length)
-	max := math.Max(maxVer, math.Max(maxHor, maxDiag))
+	var maxVer = MaxVertical(list, length)
+	var maxHor = MaxHorizontal(list, length)
+	var maxDiag = MaxDiagonal(list, length)
+	var max = math.Max(maxVer, math.Max(maxHor, maxDiag))
 	return int(max)
 }
 

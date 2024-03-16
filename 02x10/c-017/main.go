@@ -1,11 +1,8 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-func getBriishVocal(num int) string {
+func GetBriishVocal(num int) string {
 	switch num {
 	case 0:
 		return ""
@@ -65,45 +62,50 @@ func getBriishVocal(num int) string {
 		return "ninety"
 	}
 	if num > 999 {
-		thousandth := num / 1000
-		theRest := num - 1000*thousandth
-		theRestVocal := ""
+		var thousandth = num / 1000
+		var theRest = num - 1000*thousandth
+		var theRestVocal = ""
 		if theRest > 0 {
-			theRestVocal = " and " + getBriishVocal(theRest)
+			theRestVocal = " and " + GetBriishVocal(theRest)
 		}
-		return getBriishVocal(thousandth) + " thousand" + theRestVocal
+		return GetBriishVocal(thousandth) + " thousand" + theRestVocal
 	}
 	if num > 99 {
-		hundredth := num / 100
-		theRest := num - 100*hundredth
-		theRestVocal := ""
+		var hundredth = num / 100
+		var theRest = num - 100*hundredth
+		var theRestVocal = ""
 		if theRest > 0 {
-			theRestVocal = " and " + getBriishVocal(theRest)
+			theRestVocal = " and " + GetBriishVocal(theRest)
 		}
-		return getBriishVocal(hundredth) + " hundred" + theRestVocal
+		return GetBriishVocal(hundredth) + " hundred" + theRestVocal
 	}
 	if num > 20 {
-		tenth := num / 10 * 10
-		oneth := num % 10
-		return getBriishVocal(tenth) + "-" + getBriishVocal(oneth)
+		var tenth = num / 10 * 10
+		var oneth = num % 10
+		return GetBriishVocal(tenth) + "-" + GetBriishVocal(oneth)
 	}
 	return ""
 }
 
-func countLetters(strnum string) int {
-	strnum = strings.ReplaceAll(strnum, " ", "")
-	strnum = strings.ReplaceAll(strnum, "-", "")
-	return len(strnum)
+func CountValidLetters(strnum string) int {
+	var length = 0
+	for i := 0; i < len(strnum); i++ {
+		var ch = strnum[i]
+		if ch != ' ' && ch != '-' {
+			length++
+		}
+	}
+	return length
 }
 
-func numberLetters() int {
-	result := 0
+func NumberLetters() int {
+	var result = 0
 	for i := 1; i <= 1000; i++ {
-		result += countLetters(getBriishVocal(i))
+		result += CountValidLetters(GetBriishVocal(i))
 	}
 	return result
 }
 
 func main() {
-	fmt.Println(numberLetters())
+	fmt.Println(NumberLetters())
 }

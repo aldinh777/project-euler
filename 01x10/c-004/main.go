@@ -7,7 +7,7 @@ import (
 )
 
 func IsPalindrome(num int) bool {
-	str := strconv.FormatInt(int64(num), 10)
+	var str = strconv.FormatInt(int64(num), 10)
 	for i := 0; i < len(str)/2; i++ {
 		if str[i] != str[len(str)-i-1] {
 			return false
@@ -20,7 +20,7 @@ func LargestPalindrome(num int) int {
 	if num == 0 {
 		return 0
 	}
-	result := 0
+	var result = 0
 	for i := num; i > 0; i-- {
 		if IsPalindrome(num * i) {
 			result = num * i

@@ -1,27 +1,29 @@
 package main
 
-import "fmt"
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
-func digify(a *string, b *string) {
+func Digify(a *string, b *string) {
 	if len(*a) > len(*b) {
-		oom := len(*a) - len(*b)
+		var oom = len(*a) - len(*b)
 		for i := 0; i < oom; i++ {
 			*b = "0" + *b
 		}
 	} else {
-		oom := len(*b) - len(*a)
+		var oom = len(*b) - len(*a)
 		for i := 0; i < oom; i++ {
 			*a = "0" + *a
 		}
 	}
 }
 
-func chradd(a string, b string, r bool) (string, bool) {
-	num_a := int(a[0] - 48)
-	num_b := int(b[0] - 48)
-	rem := false
-	res := num_a + num_b
+func ChrAdd(a string, b string, r bool) (string, bool) {
+	var num_a = int(a[0] - 48)
+	var num_b = int(b[0] - 48)
+	var rem = false
+	var res = num_a + num_b
 	if r {
 		res += 1
 	}
@@ -33,12 +35,12 @@ func chradd(a string, b string, r bool) (string, bool) {
 	return stress, rem
 }
 
-func stradd(a string, b string) string {
-	dupe_a, dupe_b := a, b
-	result, rem := "", false
-	digify(&dupe_a, &dupe_b)
+func StrAdd(a string, b string) string {
+	var dupe_a, dupe_b = a, b
+	var result, rem = "", false
+	Digify(&dupe_a, &dupe_b)
 	for i := len(dupe_a) - 1; i >= 0; i-- {
-		res, temprem := chradd(string(dupe_a[i]), string(dupe_b[i]), rem)
+		var res, temprem = ChrAdd(string(dupe_a[i]), string(dupe_b[i]), rem)
 		rem = temprem
 		result = res + result
 		if i == 0 && rem {
@@ -48,24 +50,24 @@ func stradd(a string, b string) string {
 	return result
 }
 
-func strpow(strnum string, times int) string {
-	res := strnum
+func StrPow(strnum string, times int) string {
+	var res = strnum
 	for i := 1; i < times; i++ {
-		res = stradd(res, res)
+		res = StrAdd(res, res)
 	}
 	return res
 }
 
-func sum2Power(power int) int {
-	powstr := strpow("2", power)
-	result := 0
+func Sum2Power(power int) int {
+	var powstr = StrPow("2", power)
+	var result = 0
 	for i := 0; i < len(powstr); i++ {
-		num := powstr[i] - 48
+		var num = powstr[i] - 48
 		result += int(num)
 	}
 	return result
 }
 
 func main() {
-	fmt.Println(sum2Power(1000))
+	fmt.Println(Sum2Power(1000))
 }

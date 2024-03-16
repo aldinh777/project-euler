@@ -2,9 +2,9 @@ package main
 
 import "fmt"
 
-func factorsLengthOver(num int, max int) bool {
-	totalFactor := 0
-	limit := num
+func FactorsLengthOver(num int, max int) bool {
+	var totalFactor = 0
+	var limit = num
 	for i := 1; i < limit; i++ {
 		if num%i == 0 {
 			if num/i == i {
@@ -21,11 +21,11 @@ func factorsLengthOver(num int, max int) bool {
 	return false
 }
 
-func triangleFactorOver(maxFactor int) int {
-	triangle := 0
+func TriangleFactorOver(maxFactor int) int {
+	var triangle = 0
 	for i := 1; ; i++ {
 		triangle += i
-		if factorsLengthOver(triangle, maxFactor) {
+		if FactorsLengthOver(triangle, maxFactor) {
 			break
 		}
 	}
@@ -33,5 +33,5 @@ func triangleFactorOver(maxFactor int) int {
 }
 
 func main() {
-	fmt.Println(triangleFactorOver(500))
+	fmt.Println(TriangleFactorOver(500))
 }

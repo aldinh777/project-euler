@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func FibEvenProc(max int) int {
-	sum, prev, next := 0, 0, 1
+	var sum, prev, next = 0, 0, 1
 	for next < max {
 		current := (prev + next)
 		next, prev = current, next

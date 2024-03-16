@@ -108,25 +108,25 @@ var bigdata = []string{
 	"53503534226472524250874054075591789781264330331690",
 }
 
-func digify(a *string, b *string) {
+func Digify(a *string, b *string) {
 	if len(*a) > len(*b) {
-		oom := len(*a) - len(*b)
+		var oom = len(*a) - len(*b)
 		for i := 0; i < oom; i++ {
 			*b = "0" + *b
 		}
 	} else {
-		oom := len(*b) - len(*a)
+		var oom = len(*b) - len(*a)
 		for i := 0; i < oom; i++ {
 			*a = "0" + *a
 		}
 	}
 }
 
-func chradd(a string, b string, r bool) (string, bool) {
-	num_a, _ := strconv.Atoi(a)
-	num_b, _ := strconv.Atoi(b)
-	rem := false
-	res := num_a + num_b
+func ChrAdd(a string, b string, r bool) (string, bool) {
+	var num_a, _ = strconv.Atoi(a)
+	var num_b, _ = strconv.Atoi(b)
+	var rem = false
+	var res = num_a + num_b
 	if r {
 		res += 1
 	}
@@ -138,12 +138,12 @@ func chradd(a string, b string, r bool) (string, bool) {
 	return stress, rem
 }
 
-func stradd(a string, b string) string {
-	dupe_a, dupe_b := a, b
-	result, rem := "", false
-	digify(&dupe_a, &dupe_b)
+func StrAdd(a string, b string) string {
+	var dupe_a, dupe_b = a, b
+	var result, rem = "", false
+	Digify(&dupe_a, &dupe_b)
 	for i := len(dupe_a) - 1; i >= 0; i-- {
-		res, temprem := chradd(string(dupe_a[i]), string(dupe_b[i]), rem)
+		var res, temprem = ChrAdd(string(dupe_a[i]), string(dupe_b[i]), rem)
 		rem = temprem
 		result = res + result
 		if i == 0 && rem {
@@ -154,9 +154,9 @@ func stradd(a string, b string) string {
 }
 
 func first10digitSums(arr *[]string) string {
-	result := "0"
+	var result = "0"
 	for _, data := range *arr {
-		result = stradd(result, data)
+		result = StrAdd(result, data)
 	}
 	return result[0:10]
 }

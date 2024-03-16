@@ -46,9 +46,9 @@ var problemdata = []int{
 }
 
 func GreatestProdOf(limit int, list *[]int) int {
-	result := 0
+	var result = 0
 	for i := 0; i < len(*list)-limit; i++ {
-		prod := 1
+		var prod = 1
 		for j := 0; j < limit; j++ {
 			prod *= (*list)[i+j]
 		}

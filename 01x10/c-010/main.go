@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 func TheCoolerIsPrime(number int, primelist *[]int) bool {
-	limitcheck := number
+	var limitcheck = number
 	for index := 0; index < len(*primelist); index++ {
-		i := (*primelist)[index]
+		var i = (*primelist)[index]
 		if i > limitcheck {
 			return true
 		}
