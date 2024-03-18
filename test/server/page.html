@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Project Euler Web Tester</title>
+    </head>
+    <body style="font-family: monospace">
+        <h1>Project Euler Web Tester</h1>
+        <h3>Lang</h3>
+        <div>
+            <input type="checkbox" id="go-lang" /><label for="go-lang">Go</label> |
+            <input type="checkbox" id="hs-lang" /><label for="hs-lang">Haskell</label> |
+            <input type="checkbox" id="java-lang" /><label for="java-lang">Java</label> |
+            <input type="checkbox" id="js-lang" /><label for="js-lang">Javascript</label> |
+            <input type="checkbox" id="php-lang" /><label for="php-lang">PHP</label> |
+            <input type="checkbox" id="py-lang" /><label for="py-lang">Python</label> |
+            <input type="checkbox" id="r-lang" /><label for="r-lang">R</label> |
+            <input type="checkbox" id="rb-lang" /><label for="rb-lang">Ruby</label> |
+            <input type="checkbox" id="rs-lang" /><label for="rs-lang">Rust</label>
+        </div>
+        <hr />
+        <h3>Levels</h3>
+        <div id="levels"></div>
+        <hr />
+        <button style="font-family: monospace" onclick="execute()">Execute</button>
+        <h3>Result</h3>
+        <div style="background-color: black; color: white; padding: 8px">
+            Output :
+            <pre id="output"></pre>
+        </div>
+        <script>
+            const langs = ['go', 'hs', 'java', 'js', 'php', 'py', 'r', 'rb', 'rs']
+            const range = (start, end) => [...Array(end - start + 1)].map((_, i) => i + start)
+            const levels = document.querySelector('#levels')
+            let out = '<table>'
+            for (const i of range(0, 4)) {
+                out += '<tr>'
+                const row = i * 20
+                for (const j of range(row + 1, row + 20)) {
+                    out += '<td>'
+                    out += '<input type="checkbox" id="level-' + j + '" /><label for="level-' + j + '">' + j
+                    out += '</td>'
+                }
+                out += '</tr>'
+            }
+            out += '</table>'
+            levels.innerHTML = out
+            async function execute() {
+                const res = await fetch('/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        lang: langs.filter((l) => document.querySelector('#' + l + '-lang').checked),
+                        level: range(1, 100).filter((l) => document.querySelector('#level-' + l).checked)
+                    })
+                })
+                document.querySelector('#output').textContent = JSON.stringify(await res.json(), null, 2)
+            }
+        </script>
+    </body>
+</html>
