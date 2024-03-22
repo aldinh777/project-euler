@@ -79,10 +79,6 @@
 -   Ruby : `num.to_s`
 -   Rust : `num.to_string()`
 
-### Str -> Int
-
-
-
 ### Reverse
 
 -   Haskell : `reverse str`
