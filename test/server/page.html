@@ -26,7 +26,7 @@
         <button style="font-family: monospace" onclick="execute()">Execute</button>
         <h3>Result</h3>
         <div style="background-color: black; color: white; padding: 8px">
-            Output :
+            Output : <span id="is-loading" style="visibility: hidden;">Please Wait...</span>
             <pre id="output"></pre>
         </div>
         <script>
@@ -47,6 +47,7 @@
             out += '</table>'
             levels.innerHTML = out
             async function execute() {
+                document.querySelector('#is-loading').style.visibility = 'visible'
                 const res = await fetch('/exec', {
                     method: 'POST',
                     headers: {
@@ -57,6 +58,7 @@
                         level: range(1, 100).filter((l) => document.querySelector('#level-' + l).checked)
                     })
                 })
+                document.querySelector('#is-loading').style.visibility = 'hidden'
                 document.querySelector('#output').textContent = JSON.stringify(await res.json(), null, 2)
             }
         </script>

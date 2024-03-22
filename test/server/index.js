@@ -14,7 +14,14 @@ function executeGiven(lang, level, config) {
         compilation = Promise.all(
             programming
                 .filter((p) => p.compile)
-                .map((p) => Promise.all(level.map((lv) => compileProgram(p, lv))).catch(console.error))
+                .map((p) =>
+                    Promise.all(level.map((lv) => compileProgram(p, lv))).catch((err) => {
+                        throw {
+                            type: 'compile error',
+                            err
+                        }
+                    })
+                )
         )
     }
     return compilation
@@ -22,7 +29,12 @@ function executeGiven(lang, level, config) {
             if (config?.parallelExecution) {
                 return Promise.all(
                     programming.map((p) =>
-                        Promise.all(level.map((lv) => executeProgram(p, lv, config))).catch(console.error)
+                        Promise.all(level.map((lv) => executeProgram(p, lv, config))).catch((err) => {
+                            throw {
+                                type: 'execution error',
+                                err
+                            }
+                        })
                     )
                 )
             } else {
@@ -47,7 +59,7 @@ function executeGiven(lang, level, config) {
                 })
             })
         })
-        .catch(console.error)
+        .catch((err) => err)
 }
 
 Bun.serve({
