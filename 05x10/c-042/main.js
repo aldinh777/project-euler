@@ -1,5 +1,5 @@
-import { join } from "path"
-import { readFileSync } from "fs"
+const { join } = require("path")
+const { readFileSync } = require("fs")
 
 function triangle(n) {
     return (n / 2) * (n + 1)
