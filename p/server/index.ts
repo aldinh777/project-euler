@@ -84,7 +84,7 @@ async function executeGiven(
     .catch((err) => err);
 }
 
-Bun.serve({
+const server = Bun.serve({
   async fetch(req) {
     const url = new URL(req.url);
     switch (url.pathname) {
@@ -105,3 +105,12 @@ Bun.serve({
     }
   },
 });
+
+console.log(
+  "server running at " +
+    server.protocol +
+    "://" +
+    server.hostname +
+    ":" +
+    server.port,
+);

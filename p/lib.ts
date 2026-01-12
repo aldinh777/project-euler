@@ -111,6 +111,9 @@ export function executeProgram(
     if (config?.displayExecutionProgress) {
       console.log(`| ${ch(level)} EXECUTING \t| ${name}`);
     }
+    program.on("error", (err) => {
+      reject(err.message.toString());
+    });
     program.stdout.on("data", (data) => {
       const end = Date.now();
       const timeEllapsed = end - start;
