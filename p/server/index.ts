@@ -1,18 +1,31 @@
-import { languages, partialch } from "../lang";
-import { compileProgram, executeProgram } from "../lib";
-const expected_result = require("../expected_result.json");
+import { languages, partialch, type CombinedLanguage } from "../lang";
+import {
+  compileProgram,
+  executeProgram,
+  type ExecutionConfig,
+  type CompileResult,
+  type ProgramResult,
+} from "../lib";
+import expected_result from "../expected_result.json";
 
 function mainPage() {
   return Bun.file(__dirname + "/page.html").text();
 }
 
-function executeGiven(lang, level, config) {
-  const programming = lang.map((p) => languages[p]).filter((p) => p);
-  const hasCompiled = programming.some((p) => p.compile);
-  let compilation = Promise.resolve();
+async function executeGiven(
+  lang: string[],
+  level: number[],
+  config?: ExecutionConfig,
+) {
+  const programming = lang
+    .map((p) => languages[p] as CombinedLanguage)
+    .filter((p) => p);
+  const hasCompiled = programming.some((p) => Object.hasOwn(p, "compile"));
+  let compilation = Promise.resolve<CompileResult[][]>([]);
   if (hasCompiled) {
     compilation = Promise.all(
       programming
+        // @ts-ignore
         .filter((p) => p.compile)
         .map((p) =>
           Promise.all(level.map((lv) => compileProgram(p, lv))).catch((err) => {
@@ -40,9 +53,9 @@ function executeGiven(lang, level, config) {
           ),
         );
       } else {
-        const progResult = [];
+        const progResult: ProgramResult[][] = [];
         for (const prog of programming) {
-          const lvResult = [];
+          const lvResult: ProgramResult[] = [];
           for (const lv of level) {
             lvResult.push(await executeProgram(prog, lv, config));
           }
@@ -55,7 +68,8 @@ function executeGiven(lang, level, config) {
       return result.map((lang) => {
         return lang.map((progresult) => {
           const { name, level, result, timeEllapsed } = progresult;
-          const answer = expected_result[partialch(level)];
+          const ch_index = partialch(level) as keyof typeof expected_result;
+          const answer = expected_result[ch_index];
           const correct = result == answer ? "CORRECT" : "INCORRECT";
           return {
             name,
@@ -79,7 +93,10 @@ Bun.serve({
           headers: { "Content-Type": "text/html" },
         });
       case "/exec":
-        const { lang, level } = await req.json();
+        const { lang, level } = (await req.json()) as {
+          lang: string[];
+          level: number[];
+        };
         return new Response(JSON.stringify(await executeGiven(lang, level)), {
           headers: { "Content-Type": "application/json" },
         });

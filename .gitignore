@@ -4,6 +4,6 @@
 *.pdb
 *.hi
 build
-test_config.json
+_config.json
 node_modules
 /main.js

@@ -1,12 +1,12 @@
 import { copyFileSync } from "fs";
-import expected_result from "./expected_result";
-import { ch, languages, partialch } from "./lang";
-import { compileProgram, executeProgram } from "./lib";
+import expected_result from "./expected_result.json";
+import { ch, languages, partialch, type CombinedLanguage } from "./lang";
+import { compileProgram, executeProgram, type CompileResult } from "./lib";
 import default_config from "../_default_config.json";
 
 let config = default_config;
 try {
-  config = require("../test_config.json");
+  config = require("../_config.json");
 } catch (err) {
   console.log(
     "Fail to use test_config.json, copying from _default_config.json",
@@ -14,10 +14,12 @@ try {
   copyFileSync("./_default_config.json", "./test_config.json");
 }
 
-const programming = config.lang.map((p) => languages[p]).filter((p) => p);
+const programming = config.lang
+  .map((p) => languages[p] as CombinedLanguage)
+  .filter((p) => p);
 const hasCompiled = programming.some((p) => p.compile);
 
-let compilation = Promise.resolve();
+let compilation = Promise.resolve<CompileResult[][]>([]);
 
 if (hasCompiled) {
   if (config.displayCompilationProgress) {
@@ -27,9 +29,7 @@ if (hasCompiled) {
     programming
       .filter((p) => p.compile)
       .map((p) =>
-        Promise.all(
-          config.level.map((lv) => compileProgram(p, lv, config)),
-        ).catch(console.error),
+        Promise.all(config.level.map((lv) => compileProgram(p, lv, config))),
       ),
   );
 }
@@ -65,10 +65,11 @@ compilation
       if (!lang) {
         continue;
       }
-      console.log(`[[[ ${lang[0].name} ]]]`);
+      console.log(`[[[ ${lang[0]!.name} ]]]`);
       for (const progresult of lang) {
         const { level, result, timeEllapsed } = progresult;
-        const answer = expected_result[partialch(level)];
+        const ch_index = partialch(level) as keyof typeof expected_result;
+        const answer = expected_result[ch_index];
         const correct = result == answer ? "CORRECT" : "INCORRECT";
         let strout = `${ch(level)}`;
         if (config.compareAnswer) {
