@@ -11,7 +11,7 @@
     <div>
       <input type="checkbox" id="go-lang" /><label for="go-lang">Go</label> |
       <input type="checkbox" id="hs-lang" /><label for="hs-lang">Haskell</label>
-      | <input type="checkbox" id="js-lang" /><label for="js-lang"
+      | <input type="checkbox" id="ts-lang" /><label for="ts-lang"
         >Typescript</label
       >
       | <input type="checkbox" id="py-lang" /><label for="py-lang"
@@ -31,7 +31,7 @@
       <pre id="output"></pre>
     </div>
     <script>
-      const langs = ["go", "hs", "java", "js", "php", "py", "r", "rb", "rs"];
+      const langs = ["go", "hs", "ts", "py", "rs"];
       const range = (start, end) =>
         [...Array(end - start + 1)].map((_, i) => i + start);
       const levels = document.querySelector("#levels");

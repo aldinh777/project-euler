@@ -68,8 +68,9 @@ export function compileProgram(
     if (config?.displayCompilationProgress) {
       console.log(`| ${ch(level)} COMPILING \t| ${name}`);
     }
+    let err_msg = "";
     process.stderr.on("data", (err) => {
-      reject(err.toString());
+      err_msg += err.toString();
     });
     process.on("close", (_) => {
       const end = Date.now();
@@ -77,6 +78,11 @@ export function compileProgram(
       resolve({ name, level, compileTime });
       if (config?.displayCompilationProgress) {
         console.log(`| ${ch(level)} COMPILED. \t| ${name}`);
+      }
+    });
+    process.stderr.on("close", (_) => {
+      if (err_msg) {
+        reject(err_msg);
       }
     });
   });

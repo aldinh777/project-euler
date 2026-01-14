@@ -8,10 +8,8 @@ let config = default_config;
 try {
   config = require("../_config.json");
 } catch (err) {
-  console.log(
-    "Fail to use test_config.json, copying from _default_config.json",
-  );
-  copyFileSync("./_default_config.json", "./test_config.json");
+  console.log("Fail to use _config.json, copying from _default_config.json");
+  copyFileSync("./_default_config.json", "./_config.json");
 }
 
 const programming = config.lang
