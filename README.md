@@ -1,24 +1,27 @@
 # Projekt Euler
 
-My solutions of the programming challenge from the site [Project Euler](https://projecteuler.net/) with 9 different programming language :
+My solutions of the programming challenge from the site [Project Euler](https://projecteuler.net/) with 12 different programming language :
 
-- Golang
+- C
+- Clojure
+- Go
 - Haskell
-- Java
-- Javascript
-- Php
+- Typescript
+- Julia
+- Kotlin
+- Lua
+- OCaml
+- Prolog
 - Python
-- R
-- Ruby
 - Rust
 
 ## How to
 
 make sure required compiler or interpreter is ready.
-by default, it will assume you have nodejs installed
+by default, it will assume you have bun installed
 
 run :
 
-`node test/index.js`
+`bun p`
 
-it will run test configuration from `test_config.json`. if it didn't exists yet, it will be copied from `_default_config.json`
+it will run test configuration from `_config.json`. if it didn't exists yet, it will be copied from `_default_config.json`

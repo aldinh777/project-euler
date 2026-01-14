@@ -52,32 +52,11 @@ export const languages: Record<string, Language> = {
       args: (level: any) => [`./${ch(level)}/main.py`],
     },
   },
-  rb: {
-    name: "Ruby",
-    run: {
-      cmd: "ruby",
-      args: (level: any) => [`./${ch(level)}/main.rb`],
-    },
-  },
-  js: {
-    name: "Javascript",
+  ts: {
+    name: "Typescript",
     run: {
       cmd: "bun",
       args: (level: any) => [`./${ch(level)}/main.ts`],
-    },
-  },
-  php: {
-    name: "PHP",
-    run: {
-      cmd: "php",
-      args: (level: any) => [`./${ch(level)}/main.php`],
-    },
-  },
-  r: {
-    name: "R",
-    run: {
-      cmd: "Rscript",
-      args: (level: any) => [`./${ch(level)}/main.r`],
     },
   },
   // Compiled Language
@@ -118,38 +97,6 @@ export const languages: Record<string, Language> = {
         `./${ch(level)}/main.go`,
       ],
       outputDir: (level: any) => `./build/go/${ch(level)}/`,
-    },
-  },
-  java: {
-    name: "Java",
-    compile: {
-      compiler: "javac",
-      args: (level: any) => [
-        "-d",
-        `./build/java/${ch(level)}`,
-        `./${ch(level)}/Main.java`,
-      ],
-      outputDir: (level: any) => `./build/java/${ch(level)}/`,
-    },
-    run: {
-      cmd: "java",
-      args: () => ["Main"],
-      cwd: (level: any) => `./build/java/${ch(level)}`,
-    },
-  },
-  // Uncompiled Executable
-  go_run: {
-    name: "Go (exec)",
-    run: {
-      cmd: "go",
-      args: (level: any) => ["run", `./${ch(level)}/main.go`],
-    },
-  },
-  java_run: {
-    name: "Java (exec)",
-    run: {
-      cmd: "java",
-      args: (level: any) => [`./${ch(level)}/Main.java`],
     },
   },
 };
